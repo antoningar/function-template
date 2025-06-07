@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { ExampleService } from '../business/example-service';
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -8,7 +9,8 @@ export const handler = async (
     console.log('Event:', JSON.stringify(event, null, 2));
     console.log('Context:', JSON.stringify(context, null, 2));
 
-    // Business logic will be implemented here
+    const exampleService = new ExampleService();
+    const result = await exampleService.process(event.body);
     
     return {
       statusCode: 200,
@@ -17,6 +19,7 @@ export const handler = async (
       },
       body: JSON.stringify({
         message: 'Function executed successfully',
+        result: result,
         timestamp: new Date().toISOString(),
       }),
     };

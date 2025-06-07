@@ -22,7 +22,8 @@
     "typescript": "^5",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
-    "eslint": "*"
+    "eslint": "*",
+    "ts-node": "*"
   },
   "keywords": [
     "lambda",
