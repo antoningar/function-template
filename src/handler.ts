@@ -38,3 +38,45 @@ export const handler = async (
     };
   }
 };
+
+// CLI runner
+if (require.main === module) {
+  const fakeEvent: APIGatewayProxyEvent = {
+    body: process.argv[2] || '{"test": "data"}',
+    headers: {},
+    multiValueHeaders: {},
+    httpMethod: 'POST',
+    isBase64Encoded: false,
+    path: '/test',
+    pathParameters: null,
+    queryStringParameters: null,
+    multiValueQueryStringParameters: null,
+    stageVariables: null,
+    requestContext: {} as any,
+    resource: '/test'
+  };
+
+  const fakeContext: Context = {
+    callbackWaitsForEmptyEventLoop: false,
+    functionName: 'test-function',
+    functionVersion: '1',
+    invokedFunctionArn: 'arn:aws:lambda:us-east-1:123456789012:function:test-function',
+    memoryLimitInMB: '128',
+    awsRequestId: 'test-request-id',
+    logGroupName: '/aws/lambda/test-function',
+    logStreamName: '2023/01/01/[$LATEST]test-stream',
+    getRemainingTimeInMillis: () => 30000,
+    done: () => {},
+    fail: () => {},
+    succeed: () => {}
+  };
+
+  handler(fakeEvent, fakeContext)
+    .then(result => {
+      console.log('Result:', JSON.stringify(result, null, 2));
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      process.exit(1);
+    });
+}
