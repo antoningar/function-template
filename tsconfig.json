@@ -19,7 +19,7 @@
   },
   "include": [
     "src/**/*",
-    "business/**/*"
+    "src/business/**/*"
   ],
   "exclude": [
     "node_modules",
