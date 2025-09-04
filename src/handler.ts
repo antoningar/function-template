@@ -1,10 +1,20 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { APIGatewayProxyEvent } from 'aws-lambda';
 import { ExampleService } from '../business/example-service';
+
+interface Context {
+  clientContext: ClientContext
+};
+
+interface ClientContext {
+  gc_client_id: string
+  gc_client_secret: string
+  gc_aws_region: string
+};
 
 export const handler = async (
   event: APIGatewayProxyEvent,
   context: Context
-): Promise<APIGatewayProxyResult> => {
+) => {
   try {
     console.log('Event:', JSON.stringify(event, null, 2));
     console.log('Context:', JSON.stringify(context, null, 2));
@@ -57,18 +67,11 @@ if (require.main === module) {
   };
 
   const fakeContext: Context = {
-    callbackWaitsForEmptyEventLoop: false,
-    functionName: 'test-function',
-    functionVersion: '1',
-    invokedFunctionArn: 'arn:aws:lambda:us-east-1:123456789012:function:test-function',
-    memoryLimitInMB: '128',
-    awsRequestId: 'test-request-id',
-    logGroupName: '/aws/lambda/test-function',
-    logStreamName: '2023/01/01/[$LATEST]test-stream',
-    getRemainingTimeInMillis: () => 30000,
-    done: () => {},
-    fail: () => {},
-    succeed: () => {}
+    clientContext: {
+      gc_client_id: '',
+      gc_client_secret: '',
+      gc_aws_region: 'us-east-1'
+    }
   };
 
   handler(fakeEvent, fakeContext)
