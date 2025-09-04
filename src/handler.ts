@@ -68,8 +68,8 @@ if (require.main === module) {
 
   const fakeContext: Context = {
     clientContext: {
-      gc_client_id: '',
-      gc_client_secret: '',
+      gc_client_id: 'asdadad-asdadad-asdada',
+      gc_client_secret: 'lksahgoaijsfd-aslkfdavnlczv-dsaoietyrs',
       gc_aws_region: 'us-east-1'
     }
   };
