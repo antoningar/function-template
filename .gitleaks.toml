@@ -1,0 +1,79 @@
+title = "Custom Gitleaks Config for GC Secrets"
+
+# Extend the default gitleaks config to keep all standard rules
+[extend]
+useDefault = true
+
+# Rule for gc_client_id - catches any non-empty value
+[[rules]]
+id = "gc-client-id"
+description = "GC Client ID - any non-empty value"
+regex = '''gc_client_id['"]?\s*[:=]\s*['"]([^'"\s]+)['"]'''
+keywords = ["gc_client_id"]
+tags = ["gc", "client", "id"]
+
+# Rule for gc_client_secret - catches any non-empty value
+[[rules]]
+id = "gc-client-secret"
+description = "GC Client Secret - any non-empty value"
+regex = '''gc_client_secret['"]?\s*[:=]\s*['"]([^'"\s]+)['"]'''
+keywords = ["gc_client_secret"]
+tags = ["gc", "client", "secret"]
+
+# Alternative broader rules that catch various formatting styles
+
+# Catches gc_client_id with various quote styles and spacing
+[[rules]]
+id = "gc-client-id-broad"
+description = "GC Client ID with flexible formatting"
+regex = '''gc_client_id\s*[=:]\s*["'`]?([^"'`\s,;}]+)["'`]?'''
+keywords = ["gc_client_id"]
+tags = ["gc", "client", "id"]
+
+# Catches gc_client_secret with various quote styles and spacing
+[[rules]]
+id = "gc-client-secret-broad"
+description = "GC Client Secret with flexible formatting"
+regex = '''gc_client_secret\s*[=:]\s*["'`]?([^"'`\s,;}]+)["'`]?'''
+keywords = ["gc_client_secret"]
+tags = ["gc", "client", "secret"]
+
+# Super aggressive rules that catch ANY line containing these keys with values
+
+# Any line with gc_client_id and a value
+[[rules]]
+id = "gc-client-id-any"
+description = "Any line with gc_client_id and a value"
+regex = '''(?i)gc_client_id.*[:=].*\S+'''
+keywords = ["gc_client_id"]
+tags = ["gc", "client", "id"]
+
+# Any line with gc_client_secret and a value
+[[rules]]
+id = "gc-client-secret-any"
+description = "Any line with gc_client_secret and a value"
+regex = '''(?i)gc_client_secret.*[:=].*\S+'''
+keywords = ["gc_client_secret"]
+tags = ["gc", "client", "secret"]
+
+# Allowlist section - you can add patterns to ignore false positives
+[allowlist]
+# Example: Ignore if the value is explicitly empty or a placeholder
+paths = [
+  '''test/.*''',  # Ignore test directories
+  '''.*\.test\..*''',  # Ignore test files
+]
+
+# You can also allowlist specific commit patterns
+commits = [
+  '''(?i)(test|testing|example)''',  # Ignore commits with "test" in the message
+]
+
+# Uncomment below to allowlist specific patterns (be careful with this!)
+# [[allowlist.regexes]]
+# regex = '''gc_client_id:\s*["']?["']?'''  # Would ignore empty values
+# description = "Ignore empty gc_client_id"
+
+# [[allowlist.regexes]]
+# regex = '''gc_client_secret:\s*["']?["']?'''  # Would ignore empty values  
+# description = "Ignore empty gc_client_secret"
