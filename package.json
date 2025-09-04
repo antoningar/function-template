@@ -13,17 +13,17 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "purecloud-platform-client-v2": "*"
+    "purecloud-platform-client-v2": "*",
+    "ts-node": "*",
+    "@types/node": "^22",
+    "@types/aws-lambda": "*"
   },
   "devDependencies": {
     "@cucumber/cucumber": "*",
-    "@types/aws-lambda": "*",
-    "@types/node": "^22",
     "typescript": "^5",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
-    "eslint": "*",
-    "ts-node": "*"
+    "eslint": "*"
   },
   "keywords": [
     "lambda",
