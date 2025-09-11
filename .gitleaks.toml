@@ -1,0 +1,21 @@
+title = "Custom Gitleaks Config for GC Secrets"
+
+# Extend the default gitleaks config to keep all standard rules
+[extend]
+useDefault = true
+
+# Any line with gc_client_id and a value
+[[rules]]
+id = "gc-client-id-any"
+description = "Any line with gc_client_id and a value"
+regex = '''(?i)gc_client_id.*[:=].*\S+'''
+keywords = ["gc_client_id"]
+tags = ["gc", "client", "id"]
+
+# Any line with gc_client_secret and a value
+[[rules]]
+id = "gc-client-secret-any"
+description = "Any line with gc_client_secret and a value"
+regex = '''(?i)gc_client_secret.*[:=].*\S+'''
+keywords = ["gc_client_secret"]
+tags = ["gc", "client", "secret"]

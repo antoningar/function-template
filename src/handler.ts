@@ -70,7 +70,7 @@ if (require.main === module) {
     clientContext: {
       gc_client_id: '',
       gc_client_secret: '',
-      gc_aws_region: 'us-east-1'
+      gc_aws_region: '',
     }
   };
 

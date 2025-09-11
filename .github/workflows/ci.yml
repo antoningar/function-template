@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions: write-all
     
     strategy:
       matrix:
@@ -20,6 +21,9 @@ jobs:
     - uses: gitleaks/gitleaks-action@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_ENABLE_UPLOAD_ARTIFACT: 'false'
+        GITLEAKS_VERSION: '8.28.0'
+        GITLEAKS_LOG_LEVEL: 'trace'
     
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
