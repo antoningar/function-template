@@ -10,13 +10,13 @@
     "build": "tsc",
     "test": "cucumber-js",
     "lint": "eslint src/**/*.ts",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "zipnodev": "npm install --omit=dev && zip -r function_exporter.zip dist/ node_modules/"
   },
   "dependencies": {
     "purecloud-platform-client-v2": "*",
     "ts-node": "*",
-    "@types/node": "^22",
-    "@types/aws-lambda": "*"
+    "@types/node": "^22"
   },
   "devDependencies": {
     "@cucumber/cucumber": "*",

@@ -1,28 +1,19 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { handler } from '../../src/handler';
 import { strict as assert } from 'assert';
+import { BusinessService } from '../../src/business/business-service';
 
-let mockEvent: any;
-let mockContext: any;
-let response: any;
+let datas: string;
+let response: string;
+let service: BusinessService = new BusinessService();
 
-Given('a valid input event', function () {
-  mockEvent = {};
-  mockContext = {
-    clientContext: {}
-  };
+Given('some input datas', function () {
+  datas = 'test data';
 });
 
-When('the lambda function is invoked', async function () {
-  response = await handler(mockEvent, mockContext);
+When('the business service is invoked', async function () {
+  response = await service.process(datas);
 });
 
 Then('it should return a successful response', function () {
-  assert.equal(response.statusCode, 200);
-});
-
-Then('the response should contain the expected message', function () {
-  const body = JSON.parse(response.body);
-  assert.equal(body.message, 'Function executed successfully');
-  assert.ok(body.timestamp);
+  assert.equal(response, datas);
 });

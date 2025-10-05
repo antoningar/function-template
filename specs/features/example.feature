@@ -1,10 +1,6 @@
-Feature: Example Lambda Function
-  As a developer
-  I want to test my lambda function
-  So that I can ensure it works correctly
+Feature: Sample business logic execution
 
-  Scenario: Successful function execution
-    Given a valid input event
-    When the lambda function is invoked
+  Scenario: Successful business execution
+    Given some input datas
+    When the business service is invoked
     Then it should return a successful response
-    And the response should contain the expected message
