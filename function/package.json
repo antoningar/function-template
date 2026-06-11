@@ -11,7 +11,7 @@
     "test": "cucumber-js",
     "lint": "eslint src/**/*.ts",
     "clean": "rm -rf dist",
-    "zipnodev": "npm install --omit=dev && zip -r function_exporter.zip dist/ node_modules/"
+    "zipnodev": "npm install --omit=dev && zip -r function.zip dist/ node_modules/"
   },
   "dependencies": {
     "purecloud-platform-client-v2": "*",
